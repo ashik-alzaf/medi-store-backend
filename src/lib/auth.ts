@@ -8,14 +8,20 @@ export const auth = betterAuth({
   }),
   emailAndPassword: {
     enabled: true,
-    autoSignIn:false
+    autoSignIn: false,
+    requireEmailVerification: true,
   },
-  trustedOrigins:[process.env.APP_PUBLIC_URL!],
+  trustedOrigins: [process.env.APP_PUBLIC_URL!],
   user: {
     additionalFields: {
       role: {
         type: "string",
         defaultValue: "CUSTOMER",
+        required: false,
+      },
+      status: {
+        type: "string",
+        defaultValue: "ACTIVE",
         required: false,
       },
     },

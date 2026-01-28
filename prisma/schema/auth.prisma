@@ -4,14 +4,15 @@ model User {
   email         String
   emailVerified Boolean   @default(false)
   image         String?
+  role          String?  @default("CUSTOMER")
+  status        String?   @default("ACTIVE")
   createdAt     DateTime  @default(now())
-  role          String?   @default("CUSTOMER")
   updatedAt     DateTime  @updatedAt
   sessions      Session[]
   accounts      Account[]
 
   @@unique([email])
-  @@map("user")
+  @@map("users")
 }
 
 model Session {
@@ -61,3 +62,5 @@ model Verification {
   @@index([identifier])
   @@map("verification")
 }
+
+

@@ -6,6 +6,8 @@ import express, {
 } from "express";
 import cors from "cors";
 import { toNodeHandler } from "better-auth/node";
+import { notFound } from "./middleware/not-found";
+import { medicineRoutes } from "./modules/medicine/medicine.route";
 
 const app: Application = express();
 app.use(express.json());
@@ -17,8 +19,13 @@ app.use(
 );
 app.all("/api/auth/*splat", toNodeHandler(auth));
 
+// medicine route
+app.use("/api/seller/medicines", medicineRoutes);
+
 app.get("/", (req: Request, res: Response) => {
   res.send("hellow world");
 });
+
+app.use(notFound);
 
 export default app;
